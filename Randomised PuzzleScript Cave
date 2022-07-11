@@ -1,0 +1,166 @@
+title Randomised PuzzleScript Cave
+author SupremeChlorophyll 
+
+(Sun 10.07.2022
+
+randomised caves, generated in one turn.
+
+Instructions: alternate between 'Z' and 'X' to generate
+
+exercise for r/roguelikedev's 2022 summer code-along tutorial (week 2): https://old.reddit.com/r/roguelikedev/comments/vrnoay/roguelikedev_does_the_complete_roguelike_tutorial/ 
+)
+
+
+========
+OBJECTS
+========
+
+Background 
+transparent  
+
+Green1 
+Green    
+
+Green2 
+ lightgreen
+ 
+Green3 
+yellow 
+
+Player 
+transparent yellow 
+01110
+01110
+11111
+01110
+01010
+
+grey
+gray
+
+Wall
+darkgray lightgray
+01010
+10101
+01010
+10101
+01010
+
+red
+red
+
+lightred
+lightred
+
+blue
+blue
+
+purple
+purple
+
+pink
+pink
+
+=======
+LEGEND
+=======
+. = Background
+
+P = Player
+G = Green1
+F = Green2
+h = grey
+L = Green3
+
+color = Green1 or Green2 or Green3
+color2 = red or lightred or Green1 or Green2 or Green3
+color3 = blue or purple 
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+Background
+Player Wall 
+grey
+Green1
+Green2
+green3
+red
+lightred
+blue
+purple
+pink
+
+======
+RULES     
+======     
+(first iteration)
+[no grey|Green1| no Green3|no grey]->[grey|Green1|Green2|random color]
+
+[Green3|no Green3|no Green3]->[Green1|Green3|  Green1]
+[no grey|Green1| no Green2|no grey]->[Green2|Green2|Green2|Green2]   
+[Green3|no Green3|no Green2]->[Green1| Green3| Green1]
+
+(second iteration (repetition of the above), for more volume)
+[no grey|Green1| no Green3|no grey]->[grey|Green1|Green2|random color]  
+[Green3|no Green3|no Green3]->[Green1|Green3|  Green1]
+[no grey|Green1| no Green2|no grey]->[Green2|Green2|Green2|Green2]   
+[Green3|no Green3|no Green2]->[Green1| Green3| Green1]
+
+(making inert, so nothing re-spawns once the player moves)
+[color]->[grey]
+
+(creating a wall)
+[no grey]->[red]
+
+(placing the wall)
+[red|grey]->[wall|grey]
+
+(cleaning up)
+[red]->[]
+[grey]->[]
+
+==============
+WINCONDITIONS
+==============
+(don't get lost in the cave)
+   
+=======     
+LEVELS
+=======
+
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+...............P.................
+................G................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
+.................................
